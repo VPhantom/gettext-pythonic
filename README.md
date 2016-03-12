@@ -1,4 +1,4 @@
-# node-gettext-pythonic
+# gettext-pythonic
 
 Tiny [po2json](https://github.com/mikeedwards/po2json)-compatible gettext with variable substitution.
 
