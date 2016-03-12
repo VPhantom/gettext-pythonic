@@ -23,6 +23,7 @@ Here, `window._` is created for you:
 <script src="gettext-pythonic.js"></script>
 ...
 <script type="text/javascript"><!--
+  _.load(FIXMEsomeJSONdata);
   var text = _("This sentence is in English.");
 // --></script>
 ```
@@ -34,6 +35,7 @@ In Node.JS, you can choose whichever name you'd like, although keep in mind that
 ```js
 var _ = require('gettext-pythonic');
 ...
+_.load(require('locales/fr.json'));
 console.log("This sentence is in English.");
 ```
 
