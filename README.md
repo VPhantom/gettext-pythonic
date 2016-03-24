@@ -2,6 +2,10 @@
 
 Tiny [po2json](https://github.com/mikeedwards/po2json)-compatible gettext with variable substitution.
 
+## CAUTION: Refactor in progress!
+
+> This module is currently being refactored to play nice with Underscore.JS and implement plural forms.  Please wait for release 1.0 before using in production!
+
 This module allows you to use xgettext to build POT files, poedit (or online alternatives) to create PO translations, [po2json](https://github.com/mikeedwards/po2json) at build time to create JavaScript-friendly JSON representations of those PO files, while using a simple gettext() or _() invocation.
 
 This is a simplification of some of the ideas found at [localeplanet.com](http://www.localeplanet.com/). **It does not handle plural forms!**  If you'd like actual conformance with gettext's handling of plural forms (at the expense of this one's friendly variable substitution), see [Jed](https://github.com/SlexAxton/Jed).
@@ -14,6 +18,22 @@ _("Talking about {foo} and {bar}.", {'foo': somevar, 'bar': othervar});
 ```
 
 ## Usage
+
+### Server-side, build time
+
+Maintain your English PO template the standard way:
+
+```sh
+xgettext -L JavaScript -o locales/messages.pot ...files...
+```
+
+...then use, for example, poedit to maintain the translations, such as a `locales/fr.po` for example.
+
+...then use [po2json](https://github.com/mikeedwards/po2json) to generate the JSON equivalent of each non-English PO file:
+
+```sh
+po2json locales/fr.po htdocs/locale_fr.json --fuzzy
+```
 
 ### Client-side
 
@@ -38,7 +58,3 @@ var _ = require('gettext-pythonic');
 _.load(require('locales/fr.json'));
 console.log("This sentence is in English.");
 ```
-
-## TODO
-
-- [ ] Clean up and publish on NPM
