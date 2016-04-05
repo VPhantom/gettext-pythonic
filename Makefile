@@ -1,14 +1,23 @@
-JS      = uglifyjs --compress --mangle --reserved window "--comments=/Free software under/"
+JS     := node_modules/.bin/uglifyjs --compress --mangle --comments "/Free software under/"
+JSLINT := node_modules/.bin/eslint --fix
 
 help:
-	@echo "Try one of: clean, all"
+	echo "Try one of: clean, build, lint, test"
 
 clean:
-	rm -f *.min.js
+	rm -f *.min.js *.js.map
 
-all:	gettext-pythonic.min.js
+build:	gettext-pythonic.min.js
+
+lint:
+	$(JSLINT) --fix gettext-pythonic.js
+
+test:
+	echo "TEST NOT YET IMPLEMENTED"
 
 %.min.js:	%.js
-	$(JS) -o $@ -- $<
+	$(JS) --source-map $@.map -o $@ -- $<
 
-.PHONY: help all clean
+.PHONY: help clean build lint test
+
+.SILENT:	help
