@@ -1,6 +1,6 @@
 {
   "name": "gettext-pythonic",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Tiny po2json-compatible gettext with variable substitution",
   "main": "gettext-pythonic.js",
   "authors": [
