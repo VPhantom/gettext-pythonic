@@ -1,0 +1,21 @@
+{
+  "name": "gettext-pythonic",
+  "version": "0.5.0",
+  "description": "Tiny po2json-compatible gettext with variable substitution",
+  "main": "gettext-pythonic.js",
+  "authors": [
+    "Stéphane Lavergne <lis@imars.com> (https://github.com/VPhantom)"
+  ],
+  "license": "GPL-3.0",
+  "homepage": "https://github.com/VPhantom/gettext-pythonic",
+  "moduleType": [
+    "globals"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
