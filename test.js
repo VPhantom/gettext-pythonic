@@ -103,3 +103,63 @@ test("Named pythonic variable substitution", function(t) {
 
   t.end();
 });
+
+test("Load a language", function(t) {
+  var lang = {
+    "This is a test"       : [null, "Ceci est un test"],
+    "This isn't translated": [null, ""],
+    "This is null"         : null,
+    "This is empty"        : [],
+    "This is incomplete"   : [null],
+    "This is convenient"   : "Ceci est pratique"
+  };
+
+  __.load(lang);
+
+  t.deepEqual(__._lang, lang, "loaded to _lang property");
+
+  t.equal(
+    __("This is a test"),
+    "Ceci est un test",
+    "look up key in language"
+  );
+
+  t.equal(
+    __("Non-existent string"),
+    "Non-existent string",
+    "unknown key in language stays the same"
+  );
+
+  t.equal(
+    __("This isn't translated"),
+    "This isn't translated",
+    "key exists but not translated, outputs key"
+  );
+
+  t.equal(
+    __("This is null"),
+    "This is null",
+    "key exists but contains null, outputs key"
+  );
+
+  t.equal(
+    __("This is empty"),
+    "This is empty",
+    "key exists but contains empty array, outputs key"
+  );
+
+  t.equal(
+    __("This is incomplete"),
+    "This is incomplete",
+    "key exists but contains single-element array, outputs key"
+  );
+
+  t.equal(
+    __("This is convenient"),
+    "Ceci est pratique",
+    "key exists and contains direct string, outputs string"
+  );
+
+  t.end();
+});
+

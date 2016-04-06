@@ -35,6 +35,10 @@ xgettext -L JavaScript -o locales/messages.pot ...files...
 po2json locales/fr.po htdocs/locale_fr.json --fuzzy
 ```
 
+#### Basic JSON
+
+Note that if all you need is a quick and dirty 1:1 translation with substitutions, you don't need to use gettext and po2json: a simple object where each key is a source string and each value is the translated version, will also work (including variable substitution).
+
 ### Client-side
 
 Here, `window.gettext` and `window.__` are created for you:

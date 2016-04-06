@@ -29,6 +29,11 @@
       : target
     );
 
+    if (typeof res === "object") {
+      // For now, hard-code into 2nd element of the array
+      res = res[1] || target;
+    }
+
     if (args !== null && typeof args === "object") {
       res = res.replace(gettext._formatRE, function(z, key) {
         return args[key] || "";
