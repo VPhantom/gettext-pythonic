@@ -31,7 +31,7 @@
 
     if (args !== null && typeof args === "object") {
       res = res.replace(gettext._formatRE, function(z, key) {
-        return args[key];
+        return args[key] || "";
       });
     }
 
