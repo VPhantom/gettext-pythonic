@@ -58,7 +58,7 @@ Example:
 ```json
 var myLanguage = {
   "English original": "Translated equivalent",
-  ...
+  "Another one": "..."
 };
 ```
 
@@ -70,7 +70,7 @@ var myLanguage = {
   "There is one result": [
     null,
     "Il y a %{count} résultat",
-	 "Il y a %{count} résultats"
+    "Il y a %{count} résultats"
   ]
 };
 ```
