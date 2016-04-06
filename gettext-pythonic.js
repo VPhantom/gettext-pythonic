@@ -38,7 +38,7 @@
     return res;
   };
 
-  gettext._formatRE = /\{([^}]+)\}/g;
+  gettext._formatRE = /%\{([^}]+)\}/g;
 
   gettext._lang = null;
   gettext.load = function(newLang) {
