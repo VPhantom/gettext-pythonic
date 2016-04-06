@@ -20,6 +20,7 @@
   "devDependencies": {
     "eslint": "^2.6.0",
     "faucet": "0.0.1",
+    "istanbul": "^0.4.2",
     "tape": "^4.5.1",
     "uglifyjs": "^2.4.10"
   }
