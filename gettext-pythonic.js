@@ -18,7 +18,7 @@
 (function(window) {
   var gettext;
 
-  if (window._) {
+  if (window.gettext) {
     return;
   }
 
@@ -52,6 +52,6 @@
   ) {
     module.exports = gettext;
   } else {
-    window._ = gettext;
+    window.gettext = (window.__ = gettext);
   }
 })(this);
