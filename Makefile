@@ -1,5 +1,6 @@
 JS     := node_modules/.bin/uglifyjs --compress --mangle --comments "/Free software under/"
 JSLINT := node_modules/.bin/eslint --fix
+TAP    := node_modules/.bin/faucet
 
 help:
 	echo "Try one of: clean, build, lint, test"
@@ -13,7 +14,7 @@ lint:
 	$(JSLINT) --fix gettext-pythonic.js
 
 test:
-	echo "TEST NOT YET IMPLEMENTED"
+	node test.js |$(TAP)
 
 %.min.js:	%.js
 	$(JS) --source-map $@.map -o $@ -- $<
