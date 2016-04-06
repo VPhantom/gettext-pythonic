@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/VPhantom/gettext-pythonic.git"
+    "url": "git+https://github.com/vphantom/gettext-pythonic.git"
   },
-  "author": "Stéphane Lavergne <lis@imars.com> (https://github.com/VPhantom)",
+  "author": "Stéphane Lavergne <lis@imars.com> (https://github.com/vphantom)",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/VPhantom/gettext-pythonic/issues"
+    "url": "https://github.com/vphantom/gettext-pythonic/issues"
   },
-  "homepage": "https://github.com/VPhantom/gettext-pythonic#readme",
+  "homepage": "https://github.com/vphantom/gettext-pythonic#readme",
   "devDependencies": {
     "eslint": "^2.6.0",
     "faucet": "0.0.1",
