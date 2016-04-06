@@ -1,5 +1,7 @@
 # gettext-pythonic
 
+[![Build Status](https://travis-ci.org/vphantom/gettext-pythonic.svg?branch=master)](https://travis-ci.org/vphantom/gettext-pythonic) [![Coverage Status](https://coveralls.io/repos/github/vphantom/gettext-pythonic/badge.svg?branch=master)](https://coveralls.io/github/vphantom/gettext-pythonic?branch=master)
+
 Tiny [po2json](https://github.com/mikeedwards/po2json)-compatible gettext with variable substitution.
 
 This module allows you to use xgettext to build POT files, poedit (or online alternatives) to create PO translations, [po2json](https://github.com/mikeedwards/po2json) at build time to create JavaScript-friendly JSON representations of those PO files, while using a simple gettext() or __() invocation.

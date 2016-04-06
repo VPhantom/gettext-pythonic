@@ -4,7 +4,7 @@
   "description": "Tiny po2json-compatible gettext with variable substitution",
   "main": "gettext-pythonic.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "istanbul cover --print none --report lcovonly test.js && cat ./coverage/lcov.info |coveralls && rm -fr ./coverage"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/vphantom/gettext-pythonic#readme",
   "devDependencies": {
+    "coveralls": "^2.11.9",
     "eslint": "^2.6.0",
     "faucet": "0.0.1",
     "istanbul": "^0.4.2",
