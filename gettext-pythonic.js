@@ -16,38 +16,49 @@
 "use strict";
 
 (function(window) {
-  var gettext;
+  var gt;
 
-  if (window.gettext) {
-    return;
-  }
+  gt = function(target, args) {
+    return gt.ngettext(target, null, null, args);
+  };
 
-  gettext = function(target, args) {
+  gt._formatRE = /%\{([^}]+)\}/g;
+  gt._pluralRE = /nplurals=(\d+);\s+plural=([^;]+);/;
+  gt._lang = null;
+  gt._nplurals = 2;  // Not currently used
+  gt._plural = function(n) {
+    return +(n != 1);  // eslint-disable-line eqeqeq
+  };
+
+  gt.ngettext = function(singular, plural, count, args) {
     var res = (
-      gettext._lang !== null && target in gettext._lang
-      ? (gettext._lang[target] || target)
-      : target
+      gt._lang !== null && singular in gt._lang
+      ? (gt._lang[singular] || singular)
+      : singular
     );
 
     if (typeof res === "object") {
-      // For now, hard-code into 2nd element of the array
-      res = res[1] || target;
+      res = res[gt._plural(count) + 1] || res[1] || singular;
     }
 
     if (args !== null && typeof args === "object") {
-      res = res.replace(gettext._formatRE, function(z, key) {
-        return args[key] || "";
+      res = res.replace(gt._formatRE, function(z, key) {
+        return (key in args ? args[key] : "");
       });
     }
 
     return res;
   };
 
-  gettext._formatRE = /%\{([^}]+)\}/g;
+  gt.load = function(newLang) {
+    var src = [];
 
-  gettext._lang = null;
-  gettext.load = function(newLang) {
-    gettext._lang = newLang;
+    gt._lang = newLang;
+    if ("" in newLang && "plural-forms" in newLang[""]) {
+      src = newLang[""]["plural-forms"].match(gt._pluralRE);
+      gt._nplurals = src[1];
+      gt._plural = new Function("n", "return +(" + src[2] + ")");
+    }
   };
 
   if (
@@ -55,8 +66,9 @@
       && module
       && typeof module.exports === "object"
   ) {
-    module.exports = gettext;
+    module.exports = gt;
   } else {
-    window.gettext = (window.__ = gettext);
+    window.gettext = (window.__ = gt);
+    window.ngettext = (window.n_ = gt.ngettext);
   }
 })(this);

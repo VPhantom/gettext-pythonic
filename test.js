@@ -157,7 +157,42 @@ test("Load a language", function(t) {
   t.equal(
     __("This is convenient"),
     "Ceci est pratique",
-    "key exists and contains direct string, outputs string"
+    "key exists and contains basic direct string, outputs string"
+  );
+
+  t.end();
+});
+
+test("Plural forms", function(t) {
+  var fr = {
+    "": {
+      "plural-forms": "nplurals=2; plural=(n > 1);"
+    },
+    "%{count} result": [
+      "${count} results",
+      "%{count} résultat",
+      "%{count} résultats"
+    ]
+  };
+
+  __.load(fr);
+
+  t.equal(
+    __.ngettext("%{count} result", "%{count} results", 0, {count: 0}),
+    "0 résultat",
+    "French with 0"
+  );
+
+  t.equal(
+    __.ngettext("%{count} result", "%{count} results", 1, {count: 1}),
+    "1 résultat",
+    "French with 1"
+  );
+
+  t.equal(
+    __.ngettext("%{count} result", "%{count} results", 23, {count: 23}),
+    "23 résultats",
+    "French with 23"
   );
 
   t.end();
