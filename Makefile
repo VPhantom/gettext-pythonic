@@ -8,6 +8,7 @@ help:
 
 clean:
 	rm -f *.min.js *.js.map
+	rm -fr coverage
 
 build:	gettext-pythonic.min.js
 
