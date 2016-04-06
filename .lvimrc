@@ -1,0 +1,10 @@
+" Project overrides for Vim
+" See: http://www.vim.org/scripts/script.php?script_id=441
+" I use it with: let g:localvimrc_persistent=2
+if &filetype =~ 'javascript'
+   setlocal expandtab
+   setlocal tabstop=2
+   setlocal shiftwidth=2
+   setlocal softtabstop=2
+   let &l:makeprg=g:localvimrc_script_dir."/node_modules/.bin/eslint --format unix %"
+endif
