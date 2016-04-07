@@ -1,6 +1,8 @@
 var test = require("tape");
 
-var __ = require("./gettext-pythonic.js");
+var gettext = require("./gettext-pythonic.js");
+var __ = gettext.gettext;
+var n_ = gettext.ngettext;
 
 test("Missing key returns itself", function(t) {
   t.equal(__("foobar"), "foobar");
@@ -96,9 +98,21 @@ test("Named pythonic variable substitution", function(t) {
   );
 
   t.equal(
+    __("...%{foo...", args),
+    "...%{foo...",
+    "graceful with missing closing brace"
+  );
+
+  t.equal(
+    __("...%{weird key+name_also-very.long[indeed]=etc}...", args),
+    "......",
+    "graceful with special characters in valid brace"
+  );
+
+  t.equal(
     __("Hi, %{one} this is %{three} or %{two}...", args),
     "Hi, first this is third or second...",
-    ""
+    "performs substitution"
   );
 
   t.end();
@@ -114,14 +128,28 @@ test("Load a language", function(t) {
     "This is convenient"   : "Ceci est pratique"
   };
 
-  __.load(lang);
+  gettext.load("invalid language data");
 
-  t.deepEqual(__._lang, lang, "loaded to _lang property");
+  t.equal(
+    __("foobar", {a: 1}),
+    "foobar",
+    "unaffected by loading a string instead of a PO object"
+  );
+
+  gettext.load(lang);
+
+  t.deepEqual(gettext._lang, lang, "loaded to _lang property");
 
   t.equal(
     __("This is a test"),
     "Ceci est un test",
     "look up key in language"
+  );
+
+  t.equal(
+    gettext("This is a test"),
+    "Ceci est un test",
+    "look up key in language using root object function shortcut"
   );
 
   t.equal(
@@ -175,24 +203,107 @@ test("Plural forms", function(t) {
     ]
   };
 
-  __.load(fr);
+  t.equal(
+    n_("%{count} result", "%{count} results", 0, {count: 0}),
+    "0 results",
+    "Default with 0"
+  );
 
   t.equal(
-    __.ngettext("%{count} result", "%{count} results", 0, {count: 0}),
+    n_("%{count} result", "%{count} results", 1, {count: 1}),
+    "1 result",
+    "Default with 1"
+  );
+
+  t.equal(
+    n_("%{count} result", "%{count} results", 23, {count: 23}),
+    "23 results",
+    "Default with 23"
+  );
+
+  t.equal(
+    n_("%{count} result", "%{count} results", -1, {count: -1}),
+    "-1 result",
+    "Default with -1"
+  );
+
+  t.equal(
+    n_("%{count} result", "%{count} results", -23, {count: -23}),
+    "-23 results",
+    "Default with -23"
+  );
+
+  gettext.load(fr);
+
+  t.equal(
+    n_("%{count} result", "%{count} results", 0, {count: 0}),
     "0 résultat",
     "French with 0"
   );
 
   t.equal(
-    __.ngettext("%{count} result", "%{count} results", 1, {count: 1}),
+    n_("%{count} result", "%{count} results", 1, {count: 1}),
     "1 résultat",
     "French with 1"
   );
 
   t.equal(
-    __.ngettext("%{count} result", "%{count} results", 23, {count: 23}),
+    n_("%{count} result", "%{count} results", 23, {count: 23}),
     "23 résultats",
     "French with 23"
+  );
+
+  t.equal(
+    n_("%{count} result", "%{count} results", -1, {count: -1}),
+    "-1 résultat",
+    "French with -1"
+  );
+
+  t.equal(
+    n_("%{count} result", "%{count} results", -23, {count: -23}),
+    "-23 résultats",
+    "French with -23"
+  );
+
+  gettext.load(23);
+
+  t.equal(
+    n_("%{count} result", "%{count} results", 0, {count: 0}),
+    "0 results",
+    "Default with 0 after French then invalid language"
+  );
+
+  t.equal(
+    n_("%{count} result", "%{count} results", 1, {count: 1}),
+    "1 result",
+    "Default with 1 after French then invalid language"
+  );
+
+  t.equal(
+    n_("%{count} result", "%{count} results", 23, {count: 23}),
+    "23 results",
+    "Default with 23 after French then invalid language"
+  );
+
+  gettext.load(fr);
+  gettext.load({});
+
+  t.equal(
+    n_("%{count} result", "%{count} results", 0, {count: 0}),
+    "0 results",
+    "Default with 0 after French then empty object"
+  );
+
+  t.equal(
+    n_("%{count} result", "%{count} results", 1, {count: 1}),
+    "1 result",
+    "Default with 1 after French then empty object"
+  );
+
+  t.equal(
+    n_("%{count} result", "%{count} results", 23, {count: 23}),
+    "23 results",
+    "Default with 23 after French then empty object"
   );
 
   t.end();

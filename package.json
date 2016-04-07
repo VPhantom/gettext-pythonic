@@ -1,6 +1,6 @@
 {
   "name": "gettext-pythonic",
-  "version": "0.5.2",
+  "version": "1.0.0",
   "description": "Tiny po2json-compatible gettext with variable substitution",
   "main": "gettext-pythonic.js",
   "scripts": {
@@ -18,9 +18,9 @@
   "homepage": "https://github.com/vphantom/gettext-pythonic#readme",
   "devDependencies": {
     "coveralls": "^2.11.9",
-    "eslint": "^2.6.0",
+    "eslint": "^2.7.0",
     "faucet": "0.0.1",
-    "istanbul": "^0.4.2",
+    "istanbul": "^0.4.3",
     "tape": "^4.5.1",
     "uglifyjs": "^2.4.10"
   }

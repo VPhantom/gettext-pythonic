@@ -1,5 +1,6 @@
-/*! gettext-pythonic
- * Copyright 2016 Stéphane Lavergne <http://www.imars.com/>
+/*! gettext-pythonic v1.0.0
+ * <https://github.com/vphantom/gettext-pythonic>
+ * Copyright 2016 Stéphane Lavergne
  * Free software under <http://www.gnu.org/licenses/lgpl-3.0.txt> */
 
 /**
@@ -15,32 +16,33 @@
 
 "use strict";
 
-(function(window) {
+(function(context) {
   var gt;
 
   gt = function(target, args) {
+    // Browser-side needs this redundancy with gt.gettext()
     return gt.ngettext(target, null, null, args);
   };
 
   gt._formatRE = /%\{([^}]+)\}/g;
   gt._pluralRE = /nplurals=(\d+);\s+plural=([^;]+);/;
-  gt._lang = null;
-  gt._nplurals = 2;  // Not currently used
-  gt._plural = function(n) {
-    return +(n != 1);  // eslint-disable-line eqeqeq
-  };
 
   gt.ngettext = function(singular, plural, count, args) {
+    // Our target is singular or its translation (possibly an array)
     var res = (
       gt._lang !== null && singular in gt._lang
       ? (gt._lang[singular] || singular)
       : singular
     );
 
+    // Plural: choose right form from array or plural argument
     if (typeof res === "object") {
       res = res[gt._plural(count) + 1] || res[1] || singular;
+    } else if (typeof plural === "string" && gt._plural(count)) {
+      res = plural;
     }
 
+    // Pythonic substitutions
     if (args !== null && typeof args === "object") {
       res = res.replace(gt._formatRE, function(z, key) {
         return (key in args ? args[key] : "");
@@ -50,25 +52,36 @@
     return res;
   };
 
+  gt.gettext = function(target, args) {
+    return gt.ngettext(target, null, null, args);
+  };
+
   gt.load = function(newLang) {
     var src = [];
 
-    gt._lang = newLang;
-    if ("" in newLang && "plural-forms" in newLang[""]) {
-      src = newLang[""]["plural-forms"].match(gt._pluralRE);
+    gt._lang = (typeof newLang === "object" ? newLang : {});
+
+    if ("" in gt._lang && "plural-forms" in gt._lang[""]) {
+      src = gt._lang[""]["plural-forms"].match(gt._pluralRE);
       gt._nplurals = src[1];
-      gt._plural = new Function("n", "return +(" + src[2] + ")");
+      gt._plural = new Function(
+        "n",
+        "n = Math.abs(n); return +(" + src[2] + ")"
+      );
+    } else {
+      gt._nplurals = 2;  // Not currently used
+      gt._plural = function(n) {
+        return +(Math.abs(n) != 1);  // eslint-disable-line eqeqeq
+      };
     }
   };
+  gt.load();  // Initialize implicitly
 
-  if (
-      typeof module === "object"
-      && module
-      && typeof module.exports === "object"
-  ) {
-    module.exports = gt;
+  if (typeof context.exports === "object") {
+    context.exports = gt;
   } else {
-    window.gettext = (window.__ = gt);
-    window.ngettext = (window.n_ = gt.ngettext);
+    // Browser-side, gettext is global so it needs to be gt, not gt.gettext
+    context.gettext = (context.__ = gt);
+    context.ngettext = (context.n_ = gt.ngettext);
   }
-})(this);
+})(module || this);

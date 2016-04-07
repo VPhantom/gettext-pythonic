@@ -1,4 +1,4 @@
-# gettext-pythonic
+# gettext-pythonic v1.0.0
 
 [![Build Status](https://travis-ci.org/vphantom/gettext-pythonic.svg?branch=master)](https://travis-ci.org/vphantom/gettext-pythonic) [![Coverage Status](https://coveralls.io/repos/github/vphantom/gettext-pythonic/badge.svg?branch=master)](https://coveralls.io/github/vphantom/gettext-pythonic?branch=master)
 
@@ -39,7 +39,7 @@ In Node.JS, you can choose whichever name you'd like, although keep in mind that
 
 ```js
 var gettext = require('gettext-pythonic');
-var __ = gettext;
+var __ = gettext.gettext;
 var n_ = gettext.ngettext;
 ...
 gettext.load(require('locales/fr.json'));
