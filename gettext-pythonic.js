@@ -24,8 +24,12 @@
     return gt.ngettext(target, null, null, args);
   };
 
-  gt._formatRE = /%\{([^}]+)\}/g;
-  gt._pluralRE = /nplurals=(\d+);\s+plural=([^;]+);/;
+  gt._formatRE    = /%\{([^}]+)\}/g;
+  gt._pluralRE    = /nplurals=(\d+);\s+plural=([^;]+);/;
+  gt._npluralsDef = 2;  // Not currently used
+  gt._pluralDef   = function(n) {
+    return +(Math.abs(n) != 1);  // eslint-disable-line eqeqeq
+  };
 
   gt.ngettext = function(singular, plural, count, args) {
     // Our target is singular or its translation (possibly an array)
@@ -61,18 +65,16 @@
 
     gt._lang = (typeof newLang === "object" ? newLang : {});
 
-    if ("" in gt._lang && "plural-forms" in gt._lang[""]) {
+    try {
       src = gt._lang[""]["plural-forms"].match(gt._pluralRE);
       gt._nplurals = src[1];
       gt._plural = new Function(
         "n",
         "n = Math.abs(n); return +(" + src[2] + ")"
       );
-    } else {
-      gt._nplurals = 2;  // Not currently used
-      gt._plural = function(n) {
-        return +(Math.abs(n) != 1);  // eslint-disable-line eqeqeq
-      };
+    } catch (e) {
+      gt._nplurals = gt._npluralsDef;
+      gt._plural = gt._pluralDef;
     }
   };
   gt.load();  // Initialize implicitly

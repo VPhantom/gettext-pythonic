@@ -309,3 +309,64 @@ test("Plural forms", function(t) {
   t.end();
 });
 
+test("Plural forms validity", function(t) {
+  var buggy = {
+    "": {
+      "plural-forms": "nothing matches here"
+    }
+  };
+  var noplural = {
+    "": {
+      "plural-forms": "nplurals=X; plural=(1);"
+    }
+  };
+  var crashme = {
+    "": {
+      "plural-forms": "nplurals=5; plural=(won't compile/);"
+    }
+  };
+
+  gettext.load(buggy);
+
+  t.equal(
+    gettext._nplurals,
+    2,
+    "no regex match, nplurals went to default"
+  );
+
+  t.equal(
+    typeof gettext._plural,
+    "function",
+    "no regex match, plural is still a function"
+  );
+
+  gettext.load(noplural);
+
+  t.equal(
+    gettext._nplurals,
+    2,
+    "nplurals NaN, went to default"
+  );
+
+  t.equal(
+    typeof gettext._plural,
+    "function",
+    "no regex match, plural is still a function"
+  );
+
+  gettext.load(crashme);
+
+  t.equal(
+    gettext._nplurals,
+    2,
+    "nplurals alongside a broken plural test, went to default"
+  );
+
+  t.equal(
+    typeof gettext._plural,
+    "function",
+    "plural test doesn't compile, still a function"
+  );
+
+  t.end();
+});
