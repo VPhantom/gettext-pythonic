@@ -1,4 +1,4 @@
-# gettext-pythonic v1.0.0
+# gettext-pythonic v1.1.0
 
 [![Build Status](https://travis-ci.org/vphantom/gettext-pythonic.svg?branch=master)](https://travis-ci.org/vphantom/gettext-pythonic) [![Coverage Status](https://coveralls.io/repos/github/vphantom/gettext-pythonic/badge.svg?branch=master)](https://coveralls.io/github/vphantom/gettext-pythonic?branch=master)
 
@@ -9,33 +9,33 @@ This is a simplification of some of the ideas found at [localeplanet.com](http:/
 
 ## Installation & Usage
 
-### Client-side
+### Client-side, stand-alone using Bower
 
 ```shell
 bower install gettext-pythonic --save
 ```
 
-You can then integrate `bower_components/gettext-pythonic/gettext-pythonic.js` or `bower_components/gettext-pythonic/gettext-pythonic.min.js` to your build as needed.
-
-Here, `window.gettext` and the shortcuts `window.__`, `window.ngettext` and `window.n_` are created for you:
+You can then integrate `bower_components/gettext-pythonic/gettext-pythonic.min.js` to your build as needed.  (The non-minified version is a CommonJS module, not suitable for direct browser use.)  This was generated using `browserify --standalone` and is thus safe as-is or with various module systems.  Stand-alone example:
 
 ```html
-<script src="gettext-pythonic.js"></script>
+<script src="gettext-pythonic.min.js"></script>
 ...
 <script type="text/javascript"><!--
+  window.__ = gettext.gettext;
+  window.n_ = gettext.ngettext;
   gettext.load(someJSONdata);
   alert(__("This sentence is in English."));
   alert(n_("One result:", "%{count} results:", 23, {count: 23}));
 // --></script>
 ```
 
-### Node.JS
+### Node.JS and client-side (CommonJS)
 
 ```shell
 npm install gettext-pythonic --save
 ```
 
-In Node.JS, you can choose whichever name you'd like, although keep in mind that following conventions tends to work best.  In JavaScript, the most common names to avoid conflicts with Underscore.JS are `gettext()`/`ngettext()` and short forms `__()`/`n_()`.
+In Node.JS or if you're using Browserify to bundle CommonJS modules together for client-side use, you can choose whichever name you'd like, although keep in mind that following conventions tends to work best.  In JavaScript, the most common names to avoid conflicts with Underscore.JS are `gettext()`/`ngettext()` and short forms `__()`/`n_()`.
 
 ```js
 var gettext = require('gettext-pythonic');

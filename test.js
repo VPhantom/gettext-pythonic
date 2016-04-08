@@ -147,7 +147,7 @@ test("Load a language", function(t) {
   );
 
   t.equal(
-    gettext("This is a test"),
+    __("This is a test"),
     "Ceci est un test",
     "look up key in language using root object function shortcut"
   );
@@ -369,4 +369,10 @@ test("Plural forms validity", function(t) {
   );
 
   t.end();
+});
+
+test.onFinish(function() {
+  if (typeof phantom !== "undefined") {
+    phantom.exit();
+  }
 });
