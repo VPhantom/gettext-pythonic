@@ -4,7 +4,7 @@
   "description": "Tiny po2json-compatible gettext with variable substitution",
   "main": "gettext-pythonic.js",
   "scripts": {
-    "test": "istanbul cover --print none --report lcovonly test.js && cat ./coverage/lcov.info |coveralls && rm -fr ./coverage"
+    "test": "echo Please use make test instead"
   },
   "repository": {
     "type": "git",
