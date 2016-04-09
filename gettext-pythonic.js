@@ -1,4 +1,4 @@
-/*! gettext-pythonic v1.1.0
+/*! gettext-pythonic v1.1.1
  * <https://github.com/vphantom/gettext-pythonic>
  * Copyright 2016 Stéphane Lavergne
  * Free software under <http://www.gnu.org/licenses/lgpl-3.0.txt> */

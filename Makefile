@@ -16,7 +16,7 @@ build:	gettext-pythonic.min.js
 
 lint:
 	$(JSLINT) gettext-pythonic.js
-	$(JSLINT) --global phantom test.js
+	$(JSLINT) test.js
 
 test:	test.browser.js
 	$(ISTANBUL) cover --print none --report lcov -x test.js test.js |$(TAP)

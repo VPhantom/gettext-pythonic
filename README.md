@@ -1,6 +1,6 @@
-# gettext-pythonic v1.1.0
+# gettext-pythonic v1.1.1
 
-[![Build Status](https://travis-ci.org/vphantom/gettext-pythonic.svg?branch=v1.1.0)](https://travis-ci.org/vphantom/gettext-pythonic) [![Coverage Status](https://coveralls.io/repos/github/vphantom/gettext-pythonic/badge.svg?branch=v1.1.0)](https://coveralls.io/github/vphantom/gettext-pythonic?branch=v1.1.0)
+[![Build Status](https://travis-ci.org/vphantom/gettext-pythonic.svg?branch=v1.1.1)](https://travis-ci.org/vphantom/gettext-pythonic) [![Coverage Status](https://coveralls.io/repos/github/vphantom/gettext-pythonic/badge.svg?branch=v1.1.1)](https://coveralls.io/github/vphantom/gettext-pythonic?branch=v1.1.1)
 
 Tiny [po2json](https://github.com/mikeedwards/po2json)-compatible gettext with variable substitution.
 

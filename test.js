@@ -373,6 +373,7 @@ test("Plural forms validity", function(t) {
 
 test.onFinish(function() {
   if (typeof phantom !== "undefined") {
+    /* global phantom: true */
     phantom.exit();
   }
 });

@@ -1,7 +1,7 @@
 " Project overrides for Vim
 " See: http://www.vim.org/scripts/script.php?script_id=441
 " I use it with: let g:localvimrc_persistent=2
-if &filetype =~ 'javascript'
+if &filetype =~ 'javascript' || &filetype =~ 'json'
    setlocal expandtab
    setlocal tabstop=2
    setlocal shiftwidth=2
