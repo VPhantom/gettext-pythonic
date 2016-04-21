@@ -11,7 +11,7 @@
  * @package   gettext-pythonic
  * @author    Stéphane Lavergne <http://www.imars.com/>
  * @copyright 2016 Stéphane Lavergne
- * @license   http://www.gnu.org/licenses/lgpl-3.0.txt  GNU LGPL version 3
+ * @license   https://opensource.org/licenses/MIT  MIT
  */
 
 "use strict";
