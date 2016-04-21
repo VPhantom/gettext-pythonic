@@ -1,7 +1,7 @@
-/*! gettext-pythonic v1.1.1
+/*! gettext-pythonic v1.1.2
  * <https://github.com/vphantom/gettext-pythonic>
  * Copyright 2016 Stéphane Lavergne
- * Free software under <http://www.gnu.org/licenses/lgpl-3.0.txt> */
+ * Free software under MIT License: <https://opensource.org/licenses/MIT> */
 
 /**
  * gettext-pythonic: Tiny po2json-compatible gettext with variable substitution

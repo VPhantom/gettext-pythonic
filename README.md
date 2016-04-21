@@ -1,6 +1,6 @@
-# gettext-pythonic v1.1.1
+# gettext-pythonic v1.1.2
 
-[![Build Status](https://travis-ci.org/vphantom/gettext-pythonic.svg?branch=v1.1.1)](https://travis-ci.org/vphantom/gettext-pythonic) [![Coverage Status](https://coveralls.io/repos/github/vphantom/gettext-pythonic/badge.svg?branch=v1.1.1)](https://coveralls.io/github/vphantom/gettext-pythonic?branch=v1.1.1)
+[![Build Status](https://travis-ci.org/vphantom/gettext-pythonic.svg?branch=v1.1.2)](https://travis-ci.org/vphantom/gettext-pythonic) [![Coverage Status](https://coveralls.io/repos/github/vphantom/gettext-pythonic/badge.svg?branch=v1.1.2)](https://coveralls.io/github/vphantom/gettext-pythonic?branch=v1.1.2)
 
 Tiny [po2json](https://github.com/mikeedwards/po2json)-compatible gettext with variable substitution.
 
@@ -122,3 +122,12 @@ __("Talking about %{foo} and %{bar}.", {'foo': somevar, 'bar': othervar});
 
 Since the whole point is to be independent of argument order, I recommend always using the named variation.
 
+## MIT License
+
+Copyright (c) 2016 Stephane Lavergne <https://github.com/vphantom>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
